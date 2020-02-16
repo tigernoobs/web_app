@@ -1,0 +1,167 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action=""  enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{{ legend }}</legend>
+            <div class="form-group">
+                {{ form.question.label(class="form-control-label") }}
+                <small class="text-muted">Data required</small>
+                {% if form.question.errors %}
+                    {{ form.question(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.question.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form.question(class="form-control form-control-lg") }}
+                    {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.marks.label(class="form-control-label") }}
+                <small class="text-muted">Data required</small>
+                {% if form.marks.errors %}
+                    {{ form.marks(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.marks.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form.marks(class="form-control form-control-lg") }}
+                    {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.option1.label(class="form-control-label") }}
+                <small class="text-muted">Data required</small>
+                {% if form.option1.errors %}
+                    {{ form.option1(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.option1.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.option1(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.option2.label(class="form-control-label") }}
+                <small class="text-muted">Data required</small>
+                {% if form.option2.errors %}
+                    {{ form.option2(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.option2.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.option2(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.option3.label(class="form-control-label") }}
+                <small class="text-muted">Optional</small>
+                {% if form.option3.errors %}
+                    {{ form.option3(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.option3.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.option3(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.option4.label(class="form-control-label") }}
+                <small class="text-muted">Optional</small>
+                {% if form.option4.errors %}
+                    {{ form.option4(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.option4.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.option4(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+             <div class="form-group">
+                {{ form.hint.label() }}         
+                {{ form.hint(class="form-control-file") }}
+                {% if form.hint.errors %}
+                    {% for error in form.picture4.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+                <div class="form-group">
+                {{ form.true_answer.label(class="form-control-label") }}
+                <small class="text-muted">Required</small>
+                {% if form.true_answer.errors %}
+                    {{ form.true_answer(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.true_answer.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.true_answer(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+          
+            <div class="text-center py-4 mt-3">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    comfirm
+                </button></div>
+            
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalCenterTitle">Add Next Question</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+    
+                                        <input type="radio" aria-label="Radio button for following text input" name="promp" value="YES">
+                                    </div>
+                                </div>
+    
+                                <input type="text" class="form-control"  value="YES" aria-label="Text input with radio button" readonly>
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input type="radio" aria-label="Radio button for following text input" name="promp" value="NO">
+                                    </div>
+                                </div>
+    
+                                <input type="text" class="form-control" value="NO"   aria-label="Text input with radio button" readonly>
+                            </div>
+    
+                        </div>
+                        <div class="modal--footer">
+    
+                            <div class="form-group">
+                                {{ form.submit(class="btn btn-outline-info") }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+
+            
+        </fieldset>
+
+        </form>
+
+</div>
+{% endblock content %}

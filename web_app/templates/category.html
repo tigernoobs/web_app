@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + category.staff.image_file) }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ category.staff.username }}</a>
+        <small class="text-muted">{{ category.pub_date.strftime('%Y-%m-%d') }}</small>
+        {% if category.staff == current_user %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('contents.update_category', category_id=category.id) }}">Update</a>
+            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+          </div>
+       
+      </div>
+      <h1 class="article-title">{{ category.title }}</h1>
+      
+      <a class="fas fa-edit" href="{{ url_for('contents.new_question', category_id = category.id)}}">Add New Question</a><br>
+    
+        
+      <h2 class="article-content">List Question:</h2><br>
+      {% for quiz in quizes %}
+       <a class="fas fa-trash" href="{{ url_for('contents.delete_quiz',quiz_id=quiz.id)}}"> <h4 class="article-title">{{ quiz.question }} </h4></a>
+      
+       <p class="article-content">Marks :{{ quiz.marks }} Answer : {{ quiz.true_answer }}</p>
+       <p class="article-content">A :{{ quiz.option1 }}</p>
+       <p class="article-content">B :{{ quiz.option2 }}</p>
+       <p class="article-content">C :{{ quiz.option3 }}</p>
+       <p class="article-content">D :{{ quiz.option4 }}</p>
+      
+      {% endfor %}
+       {% endif %}
+    </div>
+  </article>
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <form action="{{ url_for('contents.delete_category', category_id=category.id) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+       <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + category.staff.image_file) }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a c lass="mr-2">Created by :{{ category.staff.username }}</a>
+              <medium class="text-muted">Date :{{ category.pub_date.strftime('%d-%m-%Y') }}</medium>
+              <medium class="text-muted">Time :{{ category.pub_date.strftime('%H:%M') }}</medium>
+            
+            </div>
+              
+            
+               <h2> <class article-title>Title :{{ category.title }}</h2>
+                <h4>Description :<class= article-content>{{ category.description }}</h4>
+                <h4><class= article-content>total Question :{{ total }}</h4>
+                                <h4><class= article-content>Quiz id :{{ quiz.id }}</h4>
+                <h6> <a class="list-group-item active" href="{{ url_for('contents.test',category_id=category.id, quiz_id=quiz.id) }}">Test Your knowledge? Click here!</a></h6>
+
+          </div>
+
+          
+        </article>
+
+        
+             
+    
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}Users{% endblock %}
+{% block content %}
+ {% for user in users %}
+   <div class="content-section">
+
+      <div class="row">
+        <div class="col-lg-12">
+          <h5> <a  class="fas fa-trash" href="{{ url_for('users.delete_user', user_id =user.id)}}">click Here to Remove User</a></h5>
+          <h6 class="text-secondary">Status :{{ user.user }}</h6>
+           <h6 class="text-secondary">click box below  to activate user</h6>
+          <div class="list-group">
+    
+                  <a href="{{ url_for('users.validate_user', user_id=user.id) }}" class="list-group-item {% if user.user %}active{% endif %}">
+                     <div class="media">
+                         <img class="rounded-circle account-img" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
+                         <div class="media-body">
+                             <h2 class="account-heading">username :{{ user.username }}</h2>
+                             <h3 class="text-secondary">User Email :{{ user.email }}</h3>
+                      
+                                
+                         </div>
+                     </div></a>
+                   <h3> <div>Check Student Result</div></h3>   
+
+                          
+
+             </div><br><br>
+        
+    
+                     
+              
+           
+          </div>
+        </div><!-- /.col-lg-12 -->
+      </div>
+       {% endfor %}
+{% endblock %}

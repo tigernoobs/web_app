@@ -1,0 +1,129 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="{{ url_for('contents.check', category_id=category_id, quiz_id=quiz.id)}}"  enctype="multipart/form-data">
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{{ legend }}</legend>
+            <div class="form-group">
+              <article class="media content-section">
+                   <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}">
+               <div class="media-body">
+                
+                   <div class="article-metadata">
+
+                       <medium class="text-muted">UserName :{{ current_user.username }}</medium><br>
+                       
+                     <input type= "hidden"  class="text-muted" name="marks" value="{{quiz.marks}}" readonly>
+                     <input type= "hidden"  class="text-muted" name="status" value="{{ status }}" readonly>
+                     <input type= "hidden"  class="text-muted" name="title" value="{{ category.title }}" readonly>
+          
+                        <a class="fas fa-file-download" href="{{url_for('contents.download', quiz_id = quiz.id)}}">Download Notes</a>
+                     
+                   </div><br>
+                  
+              {% if current_user.user %}
+               <div class="form-group">
+            
+                     <h3><a class= article-title href="">{{ quiz.question }}</a></h3>
+                 <ul class="list-group">
+                    <li class="list-group-item"> {{ quiz.option1}}</li><br>
+                    <li class="list-group-item"> {{ quiz.option2}}</li><br>
+                    <li class="list-group-item"> {{ quiz.option3}}</li><br>
+                    <li class="list-group-item"> {{ quiz.option4}}</li><br>
+                
+                 </ul>
+                   <input type="hidden" name="answer" value="{{ quiz.true_answer}}">
+
+                </div>
+
+                    <div class="form-group">
+                    <div class="form-row align-items-center">
+                         <div class="cols-auto my-3">
+
+
+                     <select class="custom-select-lg mr-md-6 bg-dark text-white form-control" name="selection">
+
+                             <option selected>choose answer</option>
+                                <option name="selection" value="A">A</option>
+                                <option name="selection" value="B">B</option>
+                                 <option name="selection" value="C">C</option>
+                                 <option name="selection" value="D">D</option>
+                            </select>
+                            
+                         </div>
+                    </div>
+                 </div>
+
+
+
+                <div class="text-center py-4 mt-3">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                          comfirm
+                    </button></div>
+                    
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalCenterTitle">Student Response</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="cols">
+                                    <div class="form-check">
+                                         <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <input type="radio" aria-label="Radio button for following text input" name="response" value="Confident">
+
+                                                </div>
+                                                    <input type="text" class="form-control"  value="Confident" aria-label="Text input with radio button" readonly>
+                                            </div>
+
+
+
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <input type="radio" aria-label="Radio button for following text input" name="response" value="Unsure">
+                                                </div>
+                                                     <input type="text" class="form-control"  value="unsure" aria-label="Text input with radio button" readonly>
+                                            </div>
+
+
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                     <input type="radio" aria-label="Radio button for following text input" name="response" value="No">
+                                                </div>
+                                                     <input type="text" class="form-control" value="NO"   aria-label="Text input with radio button" readonly>
+                                            </div><br>
+                                            
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal--footer">
+
+                            <center><button class="btn btn-outline-primary btn-md m-0 waves-effect" onclick="submitentry()">Comfirm</button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+         {% endif %}
+          
+          
+    </div>
+       </article>
+
+    </div>
+      
+    </fieldset>
+    </form>
+    </div>
+{% endblock content %}
