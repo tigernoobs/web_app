@@ -16,6 +16,7 @@ flask-sqlalchemy = "*"
 flask-wtf = "*"
 flask-mail = "*"
 python-dotenv = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
